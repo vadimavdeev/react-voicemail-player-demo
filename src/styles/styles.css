@@ -1,0 +1,397 @@
+/******************************************************************************
+START Glitch hello-app default styles
+
+The styles in this section do some minimal CSS resets, set default fonts and 
+colors, and handle the layout for our footer and "Remix on Glitch" button. If
+you're new to CSS they may seem a little complicated, but you can scroll down
+to this section's matching END comment to see page-specific styles.
+******************************************************************************/
+
+@import url("react-voicemail-player/dist/react-voicemail-player.css");
+
+/* Our default values set as CSS variables */
+:root {
+  --color-primary-100: hsl(230, 88%, 97%);
+  --color-primary-200: hsl(230, 72%, 90%);
+  --color-primary-300: hsl(230, 71%, 76%);
+  --color-primary-400: hsl(230, 63%, 67%);
+  --color-primary-500: hsl(230, 65%, 63%);
+  --color-primary-600: hsl(230, 52%, 53%);
+  --color-primary-900: hsl(230, 57%, 27%);
+
+  --color-accent: hsl(142, 66%, 69%);
+
+  --color-gray-500: hsl(226, 23%, 74%);
+  --color-gray-600: hsl(226, 17%, 63%);
+  --color-gray-700: hsl(226, 11%, 48%);
+  --color-gray-800: hsl(226, 17%, 24%);
+  --color-gray-900: hsl(226, 24%, 16%);
+
+  --color-text-main: #ffffff;
+
+  --font-family: "HK Grotesk";
+  --font-family-header: "HK Grotesk";
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 2rem;
+  --spacing-7: 3rem;
+  --spacing-8: 4rem;
+  --spacing-9: 6rem;
+  --spacing-10: 8rem;
+  --spacing-11: 12rem;
+  --spacing-12: 16rem;
+  --spacing-13: 24rem;
+  --spacing-14: 32rem;
+  --spacing-15: 40rem;
+  --spacing-16: 48rem;
+
+  --record-button-size: var(--spacing-8);
+
+  --breakpoints-sm: 512px;
+}
+
+/* Basic page style resets */
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+p,
+h1 {
+  margin: 0;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Import fonts */
+@font-face {
+  font-family: HK Grotesk;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027")
+    format("opentype");
+}
+@font-face {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
+    format("opentype");
+}
+
+/* Our remix on glitch button */
+.btn--remix {
+  font-family: HK Grotesk;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  line-height: 1rem;
+  font-weight: 500;
+  height: 2.75rem;
+  align-items: center;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #000;
+  white-space: nowrap;
+  margin-left: auto;
+}
+.btn--remix img {
+  margin-right: 0.5rem;
+}
+.btn--remix:hover {
+  background-color: #d0fff1;
+}
+
+/* Navigation grid */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-6);
+  width: 100%;
+  flex-wrap: wrap;
+  border-top: 2px solid var(--color-gray-900);
+  box-shadow: inset 0 2px 4px -4px #ffffff;
+}
+
+.footer a:not(.btn--remix):link,
+.footer a:not(.btn--remix):visited {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  color: var(--color-text-main);
+  text-decoration: none;
+  border-style: none;
+}
+.footer a:hover {
+  background: var(--color-primary-500);
+}
+
+.footer .links {
+  white-space: nowrap;
+}
+
+.divider {
+  padding: 0 1rem;
+}
+/******************************************************************************
+END Glitch hello-app default styles
+******************************************************************************/
+
+/* Page structure */
+body {
+  font-family: HK Grotesk;
+  background-color: var(--color-gray-800);
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-main);
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-top: 4px solid var(--color-accent);
+}
+
+.wrapper {
+  min-height: 0;
+  flex: 1;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-6);
+  gap: var(--spacing-6);
+}
+
+.page {
+  max-width: var(--spacing-15);
+  text-align: left;
+}
+
+.page .title {
+  margin: 0 0 var(--spacing-6);
+}
+
+.page .text {
+  margin-bottom: var(--spacing-4);
+  line-height: 1.5;
+}
+
+.foooter {
+  flex: none;
+}
+
+.title {
+  flex: none;
+  color: var(--color-text-main);
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 1;
+  text-align: center;
+  margin: 0;
+}
+
+.link,
+.link:visited {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  color: var(--color-text-main);
+  text-decoration: none;
+  border-style: none;
+  background: linear-gradient(
+      var(--color-primary-500),
+      var(--color-primary-500)
+    )
+    no-repeat;
+  background-size: 100% 2px;
+  background-position: 0 1.15em;
+  text-shadow: 0.05em 0 var(--color-gray-800), -0.05em 0 var(--color-gray-800);
+}
+.link:hover {
+  background-image: linear-gradient(
+    var(--color-primary-300),
+    var(--color-primary-300)
+  );
+}
+
+.intro {
+  max-width: var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  align-items: center;
+}
+
+.claim-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.claim-item {
+  font-size: 18px;
+}
+
+.claim-item > span {
+  font-size: 1.2em;
+  margin-right: 0.4em;
+}
+
+.clip-list-wrapper {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: scroll;
+  width: 100%;
+  max-width: var(--spacing-13);
+  padding: 0 var(--spacing-3) var(--spacing-3);
+  background: var(--color-gray-900);
+  border-radius: var(--spacing-3);
+  box-shadow: 0 2px 0 hsla(0, 0%, 100%, 0.15),
+    inset 0 2px 2px hsla(0, 0%, 0%, 0.1);
+}
+
+.clip-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.clip-list-empty {
+  display: inline-block;
+  margin: auto;
+  color: var(--color-gray-500);
+}
+
+.clip-item {
+  position: relative;
+  max-width: var(--spacing-12);
+  padding: var(--spacing-3);
+  border-radius: var(--spacing-3);
+  background: var(--color-gray-800);
+}
+
+.clip-item-timestamp {
+  font-size: 10px;
+  line-height: 1;
+  color: var(--color-primary-200);
+  position: absolute;
+  bottom: var(--spacing-2);
+  right: var(--spacing-2);
+}
+
+.animated-height-wrapper {
+  min-height: 0;
+}
+
+.animated-height-wrapper-enter {
+  height: 0;
+}
+
+.animated-height-wrapper-enter-active {
+  /* height is set dynamically in component code */
+  transition: height 128ms ease-out;
+}
+
+.animated-height-wrapper-exit-active {
+  height: 0;
+  transition: height 128ms ease-in;
+}
+
+.clip-player {
+  --primary-color: var(--color-primary-500);
+  --secondary-color: var(--color-primary-200);
+  color: var(--color-primary-100);
+  font-family: inherit;
+}
+
+.button {
+  cursor: pointer;
+  color: var(--color-text-main);
+  background: var(--color-primary-500);
+  border: none;
+  border-radius: var(--spacing-1);
+  font-size: 14px;
+  font-weight: 700;
+  padding: var(--spacing-2) var(--spacing-4);
+  box-shadow: inset 0 2px 0 var(--color-primary-400),
+    0 2px 3px hsla(0, 0%, 0%, 0.2);
+  transition: all 128ms ease-in;
+}
+
+.record-button {
+  flex: none;
+  width: var(--record-button-size);
+  height: var(--record-button-size);
+  border-radius: 50%;
+  z-index: 0;
+  touch-action: manipulation;
+  -webkit-touch-callout: none; /* these two properties prevent selection on long press in ios */
+  -webkit-user-select: none; /* https://developer.apple.com/forums/thread/679340 */
+  user-select: none;
+}
+
+.button:active {
+  background: var(--color-primary-600);
+  box-shadow: none;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  color: var(--color-gray-800);
+  background: var(--color-gray-500);
+  box-shadow: none;
+}
+
+.record-button > .icon-microphone {
+  fill: currentColor;
+  width: calc(var(--record-button-size) / 2.75);
+}
+
+@media (max-width: 512px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .content {
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
+  }
+
+  .footer {
+    padding: var(--spacing-4);
+  }
+
+  .intro {
+    gap: var(--spacing-4);
+  }
+
+  .claim-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .claim-item {
+    font-size: 16px;
+  }
+}
