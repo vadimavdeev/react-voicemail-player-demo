@@ -3,11 +3,15 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import VoicemailPlayer from "react-voicemail-player";
 
 export default function ClipList({ clips }) {
+  const clipRefPairs = React.useMemo(() => {
+    return clips.map((clip) => [clip, React.createRef(null)]);
+  }, [clips]);
+
   return (
     <div className="clip-list-wrapper">
       <TransitionGroup className="clip-list">
-        {clips.map((clip, index) => (
-          <AnimatedHeight key={index}>
+        {clipRefPairs.map(([clip, ref], index) => (
+          <AnimatedHeight key={index} ref={ref}>
             <Clip clip={clip} />
           </AnimatedHeight>
         ))}
@@ -38,26 +42,29 @@ function Clip({ clip }) {
   );
 }
 
-function AnimatedHeight(props) {
+const AnimatedHeight = React.forwardRef(function (props, ref) {
   const { children, ...rest } = props;
   return (
     <CSSTransition
+      nodeRef={ref}
       classNames="animated-height-wrapper"
       timeout={500}
-      onEntering={(node) => {
-        node.style.height = `${node.firstElementChild?.clientHeight || 0}px`;
+      onEntering={() => {
+        ref.current.style.height = `${
+          ref.current.firstElementChild?.clientHeight || 0
+        }px`;
       }}
-      onExiting={(node) => {
-        node.style.height = "0px";
-        node.style.marginTop = "0px";
-        node.style.marginBottom = "0px";
+      onExiting={() => {
+        ref.current.style.height = "0px";
+        ref.current.style.marginTop = "0px";
+        ref.current.style.marginBottom = "0px";
       }}
       {...rest}
     >
-      <div>{React.Children.only(children)}</div>
+      <div ref={ref}>{React.Children.only(children)}</div>
     </CSSTransition>
   );
-}
+});
 
 function formatTime(timestamp) {
   const date = new Date(timestamp);
