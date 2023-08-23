@@ -11,10 +11,14 @@ export default function RecordButton({
   const [btnSize, setBtnSize] = React.useState(0);
 
   const startRecording = React.useCallback(
-    (event) => {
-      if (event.button !== 0 || !isEnabled) {
+    (startEvent) => {
+      if (startEvent.button !== 0 || !isEnabled) {
         return;
       }
+      startEvent.preventDefault();
+
+      const stopRecording = (stopEvent) => {
+        stopEvent.preventDefault();
 
       const stopRecording = () => {
         ["pointerup", "pointercancel"].forEach((eventName) => {
@@ -44,7 +48,7 @@ export default function RecordButton({
   }, []);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", zIndex: 0 }}>
       {stream && <Visualize stream={stream} btnSize={btnSize} />}
       <button
         ref={btnRef}
