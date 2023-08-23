@@ -20,7 +20,6 @@ export default function RecordButton({
       const stopRecording = (stopEvent) => {
         stopEvent.preventDefault();
 
-      const stopRecording = () => {
         ["pointerup", "pointercancel"].forEach((eventName) => {
           document.documentElement.removeEventListener(
             eventName,
