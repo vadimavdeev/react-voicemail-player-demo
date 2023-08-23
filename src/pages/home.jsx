@@ -9,11 +9,35 @@ import useClipRecorder from "../hooks/clip-recorder";
 
 export default function Home() {
   const [clips, setClips] = React.useState([]);
+  const [isDragging, setIsDragging] = React.useState(false);
+
   const addNewClip = React.useCallback((blob) => {
     setClips((current) => [...current, { blob, createdAt: Date.now() }]);
   }, []);
   const { state, error, askPermission, start, stop, stream } =
     useClipRecorder(addNewClip);
+
+  const onDrop = (event) => {
+    setIsDragging(false);
+    event.preventDefault();
+
+    if (!event.dataTransfer) return;
+
+    let file = event.dataTransfer.files.item(0);
+    if (file && file.type.startsWith("audio/")) {
+      addNewClip(file);
+    }
+  };
+
+  const onDragOver = (event) => {
+    setIsDragging(true);
+    event.preventDefault();
+  };
+
+  const onDragLeave = (event) => {
+    setIsDragging(false);
+    event.preventDefault();
+  };
 
   const renderIntro = () => {
     switch (state) {
@@ -59,8 +83,10 @@ export default function Home() {
                 <span role="presentation">🤫</span>Microphone is not available.
               </li>
               <li className="claim-item">
-                <span role="presentation">⬆️</span>You can upload an audio file
-                from your device instead
+                <span role="presentation">⬆️</span>You can drag and drop an
+                audio file onto this window,
+                <br /> or click the button below to choose an audio file from
+                your device
               </li>
             </ul>
             <label className="button">
@@ -103,7 +129,12 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div
+      className={`content ${isDragging ? "drop-target-root" : ""}`}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
+    >
       <h1 className="title">React Voicemail Player Demo</h1>
       <section className="intro">{renderIntro()}</section>
       <ClipList clips={clips} />
@@ -114,6 +145,7 @@ export default function Home() {
         onStop={stop}
         stream={stream}
       />
-    </>
+      {isDragging ? <div className="drop-target" /> : null}
+    </div>
   );
 }

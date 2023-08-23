@@ -50,8 +50,7 @@ to this section's matching END comment to see page-specific styles.
   --spacing-16: 48rem;
 
   --record-button-size: var(--spacing-8);
-
-  --breakpoints-sm: 512px;
+  --root-top-border-width: 4px;
 }
 
 /* Basic page style resets */
@@ -160,7 +159,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  border-top: 4px solid var(--color-accent);
+  border-top: var(--root-top-border-width) solid var(--color-accent);
 }
 
 .wrapper {
@@ -175,6 +174,21 @@ body {
   align-items: center;
   padding: var(--spacing-6);
   gap: var(--spacing-6);
+  overflow: scroll;
+}
+
+.drop-target-root {
+  cursor: copy;
+}
+
+.drop-target {
+  position: absolute;
+  top: var(--root-top-border-width);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 5px dashed var(--color-gray-500);
+  pointer-events: none;
 }
 
 .page {
@@ -257,7 +271,7 @@ body {
 
 .clip-list-wrapper {
   flex: 1;
-  min-height: 0;
+  min-height: 140px;
   display: flex;
   flex-direction: column-reverse;
   overflow-y: scroll;
