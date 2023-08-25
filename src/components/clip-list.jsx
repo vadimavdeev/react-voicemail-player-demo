@@ -24,12 +24,14 @@ export default function ClipList({ clips }) {
 }
 
 function Clip({ clip }) {
-  const [url, setUrl] = React.useState(null);
+  const [url, setUrl] = React.useState(clip.url);
 
   React.useEffect(() => {
-    const url = URL.createObjectURL(clip.blob);
-    setUrl(url);
-    () => URL.revokeObjectURL(url);
+    if (!clip.url && clip.blob) {
+      const blobUrl = URL.createObjectURL(clip.blob);
+      setUrl(blobUrl);
+      () => URL.revokeObjectURL(blobUrl);
+    }
   }, [clip]);
 
   return (

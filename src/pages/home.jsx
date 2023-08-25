@@ -4,18 +4,29 @@ import ClipList from "../components/clip-list";
 import useClipRecorder from "../hooks/clip-recorder";
 
 // A Clip is an object with the following properties:
-// `blob: Blob` - audio data Blob
+// `blob?: Blob` - audio data Blob
+// `url?: string` - url of the audio file
 // `createdAt: number` - timestamp when the clip was created
 
 export default function Home() {
   const [clips, setClips] = React.useState([]);
   const [isDragging, setIsDragging] = React.useState(false);
-
   const addNewClip = React.useCallback((blob) => {
     setClips((current) => [...current, { blob, createdAt: Date.now() }]);
   }, []);
+
   const { state, error, askPermission, start, stop, stream } =
     useClipRecorder(addNewClip);
+
+  const addSampleClip = () => {
+    setClips((current) => [
+      ...current,
+      {
+        url: "https://cdn.glitch.global/8402000f-258b-4d1c-b27b-abeb82d22041/long.mp3?v=1692975508540",
+        createdAt: Date.now(),
+      },
+    ]);
+  };
 
   const onDrop = (event) => {
     setIsDragging(false);
@@ -83,8 +94,14 @@ export default function Home() {
                 <span role="presentation">🤫</span>Microphone is not available.
               </li>
               <li className="claim-item">
-                <span role="presentation">⬆️</span>You can drag and drop an
-                audio file onto this window,
+                <span role="presentation">💿</span>You can either{" "}
+                <button className="button" onClick={addSampleClip}>
+                  Add a sample audio
+                </button>
+              </li>
+              <li className="claim-item">
+                <span role="presentation">⬆️</span>Or drag and drop an audio
+                file onto this window,
                 <br /> or click the button below to choose an audio file from
                 your device
               </li>

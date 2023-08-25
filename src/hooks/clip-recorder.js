@@ -13,7 +13,7 @@ import * as React from "react";
 // error: Error - if `state` is "error", this will reference
 //                the error object, otherwise `null`
 // stream: MediaStream - if `state` is "recording", this will
-//                       refrence the media stream being recorder,
+//                       refrence the media stream being recorded,
 //                       otherwise `null`
 // askPermission: () => void - a function that triggers the browser's
 //                      "Allow microphone access" dialog
@@ -34,7 +34,7 @@ export default function useClipRecorder(onClip) {
 
   React.useEffect(() => {
     if (!navigator.mediaDevices) {
-      // older browser, or the page is server over http
+      // older browser, or the page is served over http
       setState({
         state: "not-allowed",
         error: null,
